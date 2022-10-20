@@ -19,11 +19,11 @@ import static com.codeborne.selenide.Selenide.*;
 public class TestService {
     WebDriver driver;
 
-   @BeforeAll
+    @BeforeAll
     public static void driverSetup() {
         WebDriverManager.chromedriver().setup();
     }
-    
+
     @BeforeEach
     public void setup() {
         ChromeOptions options = new ChromeOptions();
@@ -31,7 +31,7 @@ public class TestService {
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
-        open("http://localhost:9999/");
+
 
     }
 
@@ -40,16 +40,18 @@ public class TestService {
         driver.quit();
         driver = null;
     }
-    String generateDate(int days){
+
+    String generateDate(int days) {
         return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
     }
 
     @Test
-    public void ValidTest(){
+    public void ValidTest() {
+        open("http://localhost:9999/");
         String date = generateDate(3);
         $("[placeholder='Город']").setValue("Казань");
-        $("[placeholder='Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT,Keys.HOME),Keys.BACK_SPACE);
+        $("[placeholder='Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[placeholder='Дата встречи']").setValue(date).sendKeys(Keys.ESCAPE);
         $("[name='name']").setValue("Иван Петров");
         $("[name='phone']").setValue("+79036334088");
@@ -59,5 +61,5 @@ public class TestService {
 
     }
 
-    
+
 }

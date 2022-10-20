@@ -1,5 +1,4 @@
 import com.codeborne.selenide.Selectors;
-import com.codeborne.selenide.Selenide;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,25 +9,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.nio.channels.Selector;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.SetValueOptions.withText;
 
-public class TestSevece {
+public class TestService {
     WebDriver driver;
 
    @BeforeAll
     public static void driverSetup() {
         WebDriverManager.chromedriver().setup();
     }
-
-    WebDriverManager wdm = WebDriverManager.chromedriver().browserInDocker()
-            .enableVnc().enableRecording();
+    
     @BeforeEach
     public void setup() {
         ChromeOptions options = new ChromeOptions();

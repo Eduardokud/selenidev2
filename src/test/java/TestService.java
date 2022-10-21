@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
@@ -35,6 +36,22 @@ public class TestService {
         $("[class='button__text']").click();
         $(Selectors.withText("Успешно!")).shouldBe(visible, Duration.ofMillis(15000));
 
+    }
+    @Test
+    public void validTestDate() {
+        open("http://localhost:9999/");
+        String date = generateDate(3);
+        $("[placeholder='Город']").setValue("Казань");
+        $("[placeholder='Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
+        $("[placeholder='Дата встречи']").setValue(date).sendKeys(Keys.ESCAPE);
+        $("[name='name']").setValue("Иван Петров");
+        $("[name='phone']").setValue("+79036334088");
+        $("[data-test-id='agreement']").click();
+        $("[class='button__text']").click();
+        $(Selectors.withText("Успешно!")).shouldBe(visible, Duration.ofMillis(15000));
+        $(".notification__content")
+                .shouldHave(Condition.text("Встреча успешно забронирована на " + date), Duration.ofSeconds(15))
+                .shouldBe(Condition.visible);
     }
 
 

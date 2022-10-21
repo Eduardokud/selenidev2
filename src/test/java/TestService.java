@@ -17,37 +17,13 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TestService {
-    WebDriver driver;
-
-    @BeforeAll
-    public static void driverSetup() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    @BeforeEach
-    public void setup() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
-
-
-    }
-
-    @AfterEach
-    public void teardown() {
-        driver.quit();
-        driver = null;
-    }
-
     String generateDate(int days) {
         return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
     }
 
     @Test
-    public void ValidTest() {
+    public void validTest() {
         open("http://localhost:9999/");
         String date = generateDate(3);
         $("[placeholder='Город']").setValue("Казань");

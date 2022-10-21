@@ -14,6 +14,6 @@ install:
   - java -jar ./artifacts/app-card-delivery.jar &
 
 build_script:
-  -Dselenide.headless=true 
+  - Dselenide.headless=true 
   - ./gradlew test --info  
   

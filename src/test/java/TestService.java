@@ -37,6 +37,7 @@ public class TestService {
         $(Selectors.withText("Успешно!")).shouldBe(visible, Duration.ofMillis(15000));
 
     }
+
     @Test
     public void validTestDate() {
         open("http://localhost:9999/");
